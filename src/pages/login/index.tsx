@@ -10,7 +10,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
-import { styled, useTheme } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel, { FormControlLabelProps } from '@mui/material/FormControlLabel'
 
@@ -66,11 +66,11 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(true)
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
+  // const theme = useTheme()
   // ** Hooks
   const auth = useAuth()
-  const theme = useTheme()
 
-  const isDark = theme.palette.mode === 'dark'
+  // const isDark = theme.palette.mode === 'dark'
 
   const {
     control,
