@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 const PricingTable = () => {
 
@@ -39,8 +39,10 @@ const PricingTable = () => {
   }, []);
 
   return <div id="stripe_container"></div>;
-}
+};
 
-PricingTable.guestGuard = true
+PricingTable.getLayout = (page: ReactNode) => <>{page}</>
+
+PricingTable.guestGuard = true;
 
 export default PricingTable
