@@ -30,7 +30,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import AuthLayout from 'src/layouts/auth'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 
 // ** Styled Components
 const LinkStyled = styled(Link)(({ theme }) => ({
@@ -49,7 +49,7 @@ const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(({ t
     color: theme.palette.common.white
   }
 }))
-interface IFormInputs {
+interface FormData {
   name: string;
   email: string;
   phone_number: number; // or string if you're not expecting a purely numerical phone number
@@ -65,7 +65,7 @@ const schema = yup.object().shape({
 })
 
 
-const defaultValues: IFormInputs = {
+const defaultValues = {
   name: '',
   email: '',
   phone_number: NaN,
@@ -83,16 +83,15 @@ const Register = () => {
 
   const auth = useAuth()
 
-  const { control, setError, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
+  const { control, setError, handleSubmit, formState: { errors } } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(schema),
     defaultValues: defaultValues,
   });
 
-  // @ts-expect-error -- this is a mock
-  const onSubmit: SubmitHandler<IFormInputs> = (data: FormData) => {
-    // @ts-expect-error -- this is a mock
-    const { email, password } = data
+  const onSubmit = (data: FormData) => {
+    const { email, password } = data;
+
     auth.login({ email, password, rememberMe }, () => {
       setError('email', {
         type: 'manual',
